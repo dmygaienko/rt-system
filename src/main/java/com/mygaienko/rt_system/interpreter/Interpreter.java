@@ -1,21 +1,27 @@
 package com.mygaienko.rt_system.interpreter;
 
-import com.mygaienko.rt_system.command.Command;
-
-import java.util.Map;
+import com.mygaienko.rt_system.model.Loader;
 
 /**
+ *
  * Created by dmygaenko on 20/05/2016.
  */
 public class Interpreter {
 
-    private Map<CommandEnum, Command> commands;
+    private Loader loader;
 
-    public Interpreter(Map commands) {
-        this.commands = commands;
+    public Interpreter(Loader loader) {
+        this.loader = loader;
     }
 
+    /**
+     * Commands:
+     *      move forward on * steps
+     *      turn on
+     *      put up box
+     *      put down box
+     */
     public void interpet() {
-        commands.get("");
+
     }
 }

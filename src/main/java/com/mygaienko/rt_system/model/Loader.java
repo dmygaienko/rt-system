@@ -1,25 +1,34 @@
 package com.mygaienko.rt_system.model;
 
 /**
+ * Commands:
+ *      move forward on * steps
+ *      turn on
+ *      put up box
+ *      put down box
+ *
  * Created by dmygaenko on 20/05/2016.
  */
 public class Loader extends Positionable {
+
+    private WorkingArea workingArea;
+    private DirectionEnum direction;
+    private boolean loaded;
 
     public Loader(Position position) {
         super(position);
     }
 
-    public void liftBox(Box box, Position position) {
-        adjustSelfPosition(position);
+    public void moveForward(long steps) {
     }
 
-    public void moveBox(Box box, Position position) {
-        adjustSelfPosition(position);
-        box.setPosition(position);
+    public void turnOn(int degrees) {
     }
 
-    private void adjustSelfPosition(Position position) {
-        getPosition().setX(position.getX());
-        getPosition().setY(position.getY());
+    public void putUpBox(Box box) {
     }
+
+    public void putDownBox(Box box) {
+    }
+
 }
