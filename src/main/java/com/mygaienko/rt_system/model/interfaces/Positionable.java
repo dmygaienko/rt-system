@@ -20,4 +20,12 @@ public abstract class Positionable {
     public void setPosition(Position position) {
         this.position = position;
     }
+
+    public int getY() {
+        return position.getY();
+    }
+
+    public int getX() {
+        return position.getX();
+    }
 }

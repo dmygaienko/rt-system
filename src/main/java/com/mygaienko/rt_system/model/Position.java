@@ -1,37 +1,35 @@
 package com.mygaienko.rt_system.model;
 
+import com.mygaienko.rt_system.model.interfaces.Positionable;
+
 /**
  * Created by dmygaenko on 20/05/2016.
  */
-public class Position implements Cloneable {
+public class Position {
 
-    private long x;
-    private long y;
+    private final int x;
+    private final int y;
 
-    public Position(long x, long y) {
+    private Positionable positionable;
+
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public long getX() {
+    public int getX() {
         return x;
     }
 
-    public void setX(long x) {
-        this.x = x;
-    }
-
-    public long getY() {
+    public int getY() {
         return y;
     }
 
-    public void setY(long y) {
-        this.y = y;
+    public Positionable getPositionable() {
+        return positionable;
     }
 
-    public Position clone() {
-        return new Position(y, y);
+    public void setPositionable(Positionable positionable) {
+        this.positionable = positionable;
     }
-
-
 }

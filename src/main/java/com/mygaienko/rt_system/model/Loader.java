@@ -14,6 +14,7 @@ import com.mygaienko.rt_system.model.interfaces.Positionable;
 public class Loader extends Positionable {
 
     public static final int SIDE_DEGREES = 90;
+
     private WorkingArea area;
 
     private DirectionEnum direction;
@@ -29,7 +30,7 @@ public class Loader extends Positionable {
         this.direction = direction;
     }
 
-    public void moveForward(long steps) {
+    public void moveForward(int steps) {
         for (int i = 0; i < steps; i++) {
             direction.step(steps, this, area);
         }
@@ -39,7 +40,7 @@ public class Loader extends Positionable {
         DirectionEnum[] directions = DirectionEnum.values();
 
         int sides = degrees / SIDE_DEGREES;
-        int i = 0;
+        int i;
         if (sides > 0) {
             i = (direction.ordinal() + sides) % directions.length;
             direction = directions[i];
@@ -48,11 +49,12 @@ public class Loader extends Positionable {
 
     public void putUpBox(Box box) {
         loadedBox = box;
-        box.setPosition(getPosition().clone());
+        box.setPosition(getPosition());
     }
 
     public void putDownBox() {
         direction.step(1, loadedBox, area);
+        loadedBox = null;
     }
 
     @Override

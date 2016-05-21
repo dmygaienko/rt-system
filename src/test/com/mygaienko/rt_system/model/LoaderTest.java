@@ -57,8 +57,8 @@ public class LoaderTest {
         loader.putUpBox(box);
         loader.turnOn(90);
         loader.putDownBox();
-        assertEquals(box.getPosition().getX(), 0);
-        assertEquals(box.getPosition().getY(), 1);
+        assertEquals(box.getX(), 0);
+        assertEquals(box.getY(), 1);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class LoaderTest {
         Box box = new Box(new Position(1, 2));
         loader.putUpBox(box);
         loader.putDownBox();
-        assertEquals(box.getPosition().getX(), 1);
-        assertEquals(box.getPosition().getY(), 2);
+        assertEquals(box.getX(), 1);
+        assertEquals(box.getY(), 2);
     }
 }

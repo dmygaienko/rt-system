@@ -1,31 +1,69 @@
 package com.mygaienko.rt_system.model;
 
+import com.mygaienko.rt_system.model.alarm.Alarm;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by dmygaenko on 20/05/2016.
  */
 public class WorkingArea {
 
-    private long length;
-    private long width;
+    private final int length;
+    private final int width;
 
-    public WorkingArea(long length, long width) {
+    private final List<Alarm> alarms = new ArrayList<>();
+
+    private final Position[][] positions;
+
+    public WorkingArea(int length, int width) {
         this.length = length;
         this.width = width;
+
+        positions = new Position[length][width];
+
+        initPositions(length, width);
     }
 
-    public long getLength() {
+    public Position getPosition(int x, int y) {
+        return positions[x][y];
+    }
+
+    private void initPositions(int length, int width) {
+        for (int x = 0; x < length; x++) {
+            for (int y = 0; y < width; y++) {
+                positions[x][y] = new Position(x, y);
+            }
+        }
+    }
+
+    public int getLength() {
         return length;
     }
 
-    public void setLength(long length) {
-        this.length = length;
-    }
-
-    public long getWidth() {
+    public int getWidth() {
         return width;
     }
 
-    public void setWidth(long width) {
-        this.width = width;
+    public boolean isAllowed(int x, int y) {
+       return !isAlarm() && !isEngaged(x, y);
     }
+
+    public boolean isEngaged(int x, int y) {
+       return getPosition(x, y).getPositionable() != null;
+    }
+
+    public boolean isAlarm() {
+        return !alarms.isEmpty();
+    }
+
+    public void setAlarm(Alarm alarm) {
+        alarms.add(alarm);
+    }
+
+    public void startProcess() {
+        alarms.clear();
+    }
+
 }
