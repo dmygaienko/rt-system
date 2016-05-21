@@ -1,5 +1,7 @@
 package com.mygaienko.rt_system.model;
 
+import com.mygaienko.rt_system.model.interfaces.Positionable;
+
 /**
  * Created by dmygaenko on 20/05/2016.
  */

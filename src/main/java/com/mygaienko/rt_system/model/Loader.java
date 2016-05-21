@@ -1,5 +1,7 @@
 package com.mygaienko.rt_system.model;
 
+import com.mygaienko.rt_system.model.interfaces.Positionable;
+
 /**
  * Commands:
  *      move forward on * steps
@@ -11,24 +13,62 @@ package com.mygaienko.rt_system.model;
  */
 public class Loader extends Positionable {
 
-    private WorkingArea workingArea;
+    public static final int SIDE_DEGREES = 90;
+    private WorkingArea area;
+
     private DirectionEnum direction;
-    private boolean loaded;
+    private Box loadedBox;
 
     public Loader(Position position) {
         super(position);
     }
 
+    public Loader(Position position, WorkingArea area, DirectionEnum direction) {
+        super(position);
+        this.area = area;
+        this.direction = direction;
+    }
+
     public void moveForward(long steps) {
+        for (int i = 0; i < steps; i++) {
+            direction.step(steps, this, area);
+        }
     }
 
     public void turnOn(int degrees) {
+        DirectionEnum[] directions = DirectionEnum.values();
+
+        int sides = degrees / SIDE_DEGREES;
+        int i = 0;
+        if (sides > 0) {
+            i = (direction.ordinal() + sides) % directions.length;
+            direction = directions[i];
+        }
     }
 
     public void putUpBox(Box box) {
+        loadedBox = box;
+        box.setPosition(getPosition().clone());
     }
 
-    public void putDownBox(Box box) {
+    public void putDownBox() {
+        direction.step(1, loadedBox, area);
+    }
+
+    @Override
+    public void setPosition(Position position) {
+        if (loadedBox != null) {
+            loadedBox.setPosition(position);
+        }
+        super.setPosition(position);
+    }
+
+    public DirectionEnum getDirection() {
+        return direction;
+    }
+
+    public void setDirection(DirectionEnum direction) {
+        this.direction = direction;
     }
 
 }

@@ -1,9 +1,11 @@
-package com.mygaienko.rt_system.model;
+package com.mygaienko.rt_system.model.interfaces;
+
+import com.mygaienko.rt_system.model.Position;
 
 /**
  * Created by dmygaenko on 20/05/2016.
  */
-abstract class Positionable {
+public abstract class Positionable {
 
     private Position position;
 

@@ -3,7 +3,7 @@ package com.mygaienko.rt_system.model;
 /**
  * Created by dmygaenko on 20/05/2016.
  */
-public class Position {
+public class Position implements Cloneable {
 
     private long x;
     private long y;
@@ -28,4 +28,10 @@ public class Position {
     public void setY(long y) {
         this.y = y;
     }
+
+    public Position clone() {
+        return new Position(y, y);
+    }
+
+
 }
