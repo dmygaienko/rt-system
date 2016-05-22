@@ -1,6 +1,7 @@
 package com.mygaienko.rt_system.model;
 
 import com.mygaienko.rt_system.model.alarm.Alarm;
+import com.mygaienko.rt_system.model.interfaces.Positionable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,19 @@ public class WorkingArea {
 
     public boolean isEngaged(int x, int y) {
        return getPosition(x, y).getPositionable() != null;
+    }
+
+    public Positionable getPositionable(int x, int y) {
+        return getPosition(x, y).getPositionable();
+    }
+
+    public void setPositionable(Positionable positionable, int x, int y) {
+        Position position = getPosition(x, y);
+
+        if (position.getPositionable() == null) {
+            position.setPositionable(positionable);
+            positionable.setPosition(position);
+        }
     }
 
     public boolean isAlarm() {

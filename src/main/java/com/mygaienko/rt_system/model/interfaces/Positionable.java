@@ -9,6 +9,9 @@ public abstract class Positionable {
 
     private Position position;
 
+    public Positionable() {
+    }
+
     public Positionable(Position position) {
         this.position = position;
     }

@@ -7,6 +7,9 @@ import com.mygaienko.rt_system.model.interfaces.Positionable;
  */
 public class Box extends Positionable {
 
+    public Box() {
+    }
+
     public Box(Position position) {
         super(position);
     }

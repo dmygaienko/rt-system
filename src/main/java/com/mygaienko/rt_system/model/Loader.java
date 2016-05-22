@@ -24,8 +24,7 @@ public class Loader extends Positionable {
         super(position);
     }
 
-    public Loader(Position position, WorkingArea area, DirectionEnum direction) {
-        super(position);
+    public Loader(WorkingArea area, DirectionEnum direction) {
         this.area = area;
         this.direction = direction;
     }
@@ -36,7 +35,7 @@ public class Loader extends Positionable {
         }
     }
 
-    public void turnOn(int degrees) {
+    public void turnAround(int degrees) {
         DirectionEnum[] directions = DirectionEnum.values();
 
         int sides = degrees / SIDE_DEGREES;
@@ -47,9 +46,10 @@ public class Loader extends Positionable {
         }
     }
 
-    public void putUpBox(Box box) {
-        loadedBox = box;
-        box.setPosition(getPosition());
+    public void putUpBox() {
+        loadedBox = direction.putUpBox(this, area);
+        loadedBox.getPosition().setPositionable(null);
+        loadedBox.setPosition(getPosition());
     }
 
     public void putDownBox() {

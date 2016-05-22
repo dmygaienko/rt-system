@@ -1,5 +1,6 @@
 package com.mygaienko.rt_system.model.interfaces;
 
+import com.mygaienko.rt_system.model.Box;
 import com.mygaienko.rt_system.model.WorkingArea;
 
 /**
@@ -8,6 +9,8 @@ import com.mygaienko.rt_system.model.WorkingArea;
 public interface Stepable {
 
     void step(int steps, Positionable position, WorkingArea area);
+
+    Box putUpBox(Positionable positionable, WorkingArea area);
 
     default void doStep(Positionable positionable, int x, int y, WorkingArea area) {
         if (area.isAllowed(x, y)) {
