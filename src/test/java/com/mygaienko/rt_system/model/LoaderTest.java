@@ -21,46 +21,46 @@ public class LoaderTest {
     @Test
     public void testTurnOn90() throws Exception {
         Loader loader = new Loader(null);
-        loader.setDirection(DirectionEnum.DOWN);
+        loader.setDirection(DirectedState.DOWN);
         loader.turnAround(90);
-        assertEquals(DirectionEnum.LEFT, loader.getDirection());
+        assertEquals(DirectedState.LEFT, loader.getDirection());
     }
 
     @Test
     public void testTurnOn180() throws Exception {
         Loader loader = new Loader(null);
-        loader.setDirection(DirectionEnum.DOWN);
+        loader.setDirection(DirectedState.DOWN);
         loader.turnAround(180);
-        assertEquals(DirectionEnum.UP, loader.getDirection());
+        assertEquals(DirectedState.UP, loader.getDirection());
     }
 
     @Test
     public void testTurnOn270() throws Exception {
         Loader loader = new Loader(null);
-        loader.setDirection(DirectionEnum.DOWN);
+        loader.setDirection(DirectedState.DOWN);
         loader.turnAround(270);
-        assertEquals(DirectionEnum.RIGHT, loader.getDirection());
+        assertEquals(DirectedState.RIGHT, loader.getDirection());
     }
 
     @Test
     public void testTurnOn360() throws Exception {
         Loader loader = new Loader(null);
-        loader.setDirection(DirectionEnum.DOWN);
+        loader.setDirection(DirectedState.DOWN);
         loader.turnAround(360);
-        assertEquals(DirectionEnum.DOWN, loader.getDirection());
+        assertEquals(DirectedState.DOWN, loader.getDirection());
     }
 
     @Test
     public void testTurnOn450() throws Exception {
         Loader loader = new Loader(null);
-        loader.setDirection(DirectionEnum.DOWN);
+        loader.setDirection(DirectedState.DOWN);
         loader.turnAround(450);
-        assertEquals(DirectionEnum.LEFT, loader.getDirection());
+        assertEquals(DirectedState.LEFT, loader.getDirection());
     }
 
     @Test
     public void putUpTurnOnPutDownBox() throws Exception {
-        Loader loader = new Loader(area, DirectionEnum.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         area.setPositionable(loader, 1, 1);
 
         Box box = new Box();
@@ -76,7 +76,7 @@ public class LoaderTest {
 
     @Test
     public void putUpPutDownBox() throws Exception {
-        Loader loader = new Loader(area, DirectionEnum.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         area.setPositionable(loader, 1, 1);
 
         Box box = new Box();

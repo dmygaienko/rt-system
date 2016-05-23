@@ -17,14 +17,14 @@ public class Loader extends Positionable {
 
     private WorkingArea area;
 
-    private DirectionEnum direction;
+    private DirectedState direction;
     private Box loadedBox;
 
     public Loader(Position position) {
         super(position);
     }
 
-    public Loader(WorkingArea area, DirectionEnum direction) {
+    public Loader(WorkingArea area, DirectedState direction) {
         this.area = area;
         this.direction = direction;
     }
@@ -36,7 +36,7 @@ public class Loader extends Positionable {
     }
 
     public void turnAround(int degrees) {
-        DirectionEnum[] directions = DirectionEnum.values();
+        DirectedState[] directions = DirectedState.values();
 
         int sides = degrees / SIDE_DEGREES;
         int i;
@@ -65,11 +65,11 @@ public class Loader extends Positionable {
         super.setPosition(position);
     }
 
-    public DirectionEnum getDirection() {
+    public DirectedState getDirection() {
         return direction;
     }
 
-    public void setDirection(DirectionEnum direction) {
+    public void setDirection(DirectedState direction) {
         this.direction = direction;
     }
 

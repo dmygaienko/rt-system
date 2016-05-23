@@ -6,7 +6,7 @@ import com.mygaienko.rt_system.model.interfaces.Stepable;
 /**
  * Created by dmygaenko on 20/05/2016.
  */
-public enum DirectionEnum implements Stepable {
+public enum DirectedState implements Stepable {
 
     UP {
         @Override

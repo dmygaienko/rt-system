@@ -27,6 +27,34 @@ public class WorkingArea {
         initPositions(length, width);
     }
 
+    public WorkingArea() {
+        length = 8;
+        width = 6;
+
+        positions = new Position[length][width];
+
+        initPositions(length, width);
+
+        initArea();
+    }
+
+    private void initArea() {
+        Loader loader1 = new Loader(this, DirectedState.DOWN);
+        setPositionable(loader1, 0, 0);
+
+        Loader loader2 = new Loader(this, DirectedState.DOWN);
+        setPositionable(loader2, 7, 5);
+
+        Box box1 = new Box();
+        setPositionable(box1, 3, 3);
+        Box box2 = new Box();
+        setPositionable(box2, 3, 4);
+        Box box3 = new Box();
+        setPositionable(box3, 4, 3);
+        Box box4 = new Box();
+        setPositionable(box4, 4, 4);
+    }
+
     public Position getPosition(int x, int y) {
         return positions[x][y];
     }
@@ -63,8 +91,16 @@ public class WorkingArea {
         Position position = getPosition(x, y);
 
         if (position.getPositionable() == null) {
+            deleteCrossLink(positionable);
+
             position.setPositionable(positionable);
             positionable.setPosition(position);
+        }
+    }
+
+    private void deleteCrossLink(Positionable positionable) {
+        if (positionable.getPosition() != null) {
+            positionable.getPosition().setPositionable(null);
         }
     }
 
