@@ -18,4 +18,13 @@ public class WorkingAreaTest {
         assertTrue(workingArea.isAlarm());
         assertFalse(workingArea.isAllowed(1, 1));
     }
+
+    @Test
+    public void test() {
+        WorkingArea workingArea = new WorkingArea();
+        workingArea.setAlarm(Alarm.FLOOD);
+
+        assertTrue(workingArea.isAlarm());
+        assertFalse(workingArea.isAllowed(1, 1));
+    }
 }
