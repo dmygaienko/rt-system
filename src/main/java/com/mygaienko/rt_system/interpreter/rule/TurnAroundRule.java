@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
  */
 public class TurnAroundRule implements Rule {
 
-    private static final String TURN_AROUND_PATTERN = "(^turn around\\s)(\\d)";
+    private static final String TURN_AROUND_PATTERN = "(^turn around\\s)(\\d+)";
     private static final Pattern PATTERN = Pattern.compile(TURN_AROUND_PATTERN);
 
     private final Loader loader;
