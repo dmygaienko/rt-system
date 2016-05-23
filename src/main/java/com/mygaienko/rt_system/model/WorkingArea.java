@@ -44,6 +44,15 @@ public class WorkingArea {
 
         Loader loader2 = new Loader(this, DirectedState.DOWN);
         setPositionable(loader2, 7, 5);
+
+        Box box1 = new Box();
+        setPositionable(box1, 3, 3);
+        Box box2 = new Box();
+        setPositionable(box2, 3, 4);
+        Box box3 = new Box();
+        setPositionable(box3, 4, 3);
+        Box box4 = new Box();
+        setPositionable(box4, 4, 4);
     }
 
     public Position getPosition(int x, int y) {
