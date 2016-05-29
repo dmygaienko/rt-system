@@ -1,6 +1,8 @@
 package com.mygaienko.rt_system.model;
 
 import com.mygaienko.rt_system.model.interfaces.Positionable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Commands:
@@ -12,6 +14,8 @@ import com.mygaienko.rt_system.model.interfaces.Positionable;
  * Created by dmygaenko on 20/05/2016.
  */
 public class Loader extends Positionable {
+
+    private static final Logger logger = LoggerFactory.getLogger(Loader.class);
 
     public static final int SIDE_DEGREES = 90;
 
@@ -45,6 +49,8 @@ public class Loader extends Positionable {
             i = (direction.ordinal() + sides) % directions.length;
             direction = directions[i];
         }
+
+        logger.info("turned around on {} degrees", degrees);
     }
 
     public void putUpBox() {
