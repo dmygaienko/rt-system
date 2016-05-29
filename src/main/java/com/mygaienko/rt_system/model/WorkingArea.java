@@ -18,7 +18,7 @@ public class WorkingArea {
 
     private final List<Alarm> alarms = new ArrayList<>();
 
-    private final Position[][] positions;
+    private Position[][] positions;
 
     private List<Positionable> positionables = new ArrayList<>();
 

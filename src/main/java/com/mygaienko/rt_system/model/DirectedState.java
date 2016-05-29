@@ -119,11 +119,14 @@ public enum DirectedState implements State, LoaderImage {
     };
 
     protected void doStep(Positionable positionable, int x, int y, WorkingArea area) {
+        Lock.lock();
         if (area.isAllowed(x, y)) {
             Position position = area.getPosition(x, y);
             position.setPositionable(positionable);
             positionable.setPosition(position);
         }
+        Lock.releaseLock();
+        sleep();
     }
 
     protected boolean reachVerticalBound(int steps, Positionable positionable, WorkingArea area) {
@@ -134,6 +137,14 @@ public enum DirectedState implements State, LoaderImage {
     protected boolean reachHorizontalBound(int steps, Positionable positionable, WorkingArea area) {
         long target = positionable.getY() + steps;
         return target < 0 || target >= area.getWidth();
+    }
+
+    private void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }
