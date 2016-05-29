@@ -27,8 +27,10 @@ public class TurnAroundRule implements Rule {
     @Override
     public void process(String msg) {
         Matcher matcher = PATTERN.matcher(msg);
-        String arg = matcher.toMatchResult().group(2);
+        if (matcher.matches()) {
+            String arg = matcher.toMatchResult().group(2);
 
-        loader.moveForward(Integer.valueOf(arg));
+            loader.turnAround(Integer.valueOf(arg));
+        }
     }
 }

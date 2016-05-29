@@ -11,12 +11,16 @@ import java.util.List;
  */
 public class WorkingArea {
 
+    private static final WorkingArea INSTANCE = new WorkingArea();
+
     private final int length;
     private final int width;
 
     private final List<Alarm> alarms = new ArrayList<>();
 
     private final Position[][] positions;
+
+    private List<Positionable> positionables = new ArrayList<>();
 
     public WorkingArea(int length, int width) {
         this.length = length;
@@ -28,31 +32,11 @@ public class WorkingArea {
     }
 
     public WorkingArea() {
-        length = 8;
-        width = 6;
-
-        positions = new Position[length][width];
-
-        initPositions(length, width);
-
-        initArea();
+        this(8, 6);
     }
 
-    private void initArea() {
-        Loader loader1 = new Loader(this, DirectedState.DOWN);
-        setPositionable(loader1, 0, 0);
-
-        Loader loader2 = new Loader(this, DirectedState.DOWN);
-        setPositionable(loader2, 7, 5);
-
-        Box box1 = new Box();
-        setPositionable(box1, 3, 3);
-        Box box2 = new Box();
-        setPositionable(box2, 3, 4);
-        Box box3 = new Box();
-        setPositionable(box3, 4, 3);
-        Box box4 = new Box();
-        setPositionable(box4, 4, 4);
+    public static WorkingArea getInstance() {
+        return INSTANCE;
     }
 
     public Position getPosition(int x, int y) {
@@ -87,7 +71,13 @@ public class WorkingArea {
         return getPosition(x, y).getPositionable();
     }
 
+    public List<Positionable> getPositionables() {
+        return positionables;
+    }
+
     public void setPositionable(Positionable positionable, int x, int y) {
+        positionables.add(positionable);
+
         Position position = getPosition(x, y);
 
         if (position.getPositionable() == null) {

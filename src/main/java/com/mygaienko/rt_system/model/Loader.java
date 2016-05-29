@@ -20,18 +20,19 @@ public class Loader extends Positionable {
     private DirectedState direction;
     private Box loadedBox;
 
-    public Loader(Position position) {
-        super(position);
-    }
-
     public Loader(WorkingArea area, DirectedState direction) {
         this.area = area;
         this.direction = direction;
     }
 
+    @Override
+    public String getImageUrl() {
+        return loadedBox == null ? direction.getImageUrl() : direction.getLoadedImageUrl();
+    }
+
     public void moveForward(int steps) {
         for (int i = 0; i < steps; i++) {
-            direction.step(steps, this, area);
+            direction.step(1, this, area);
         }
     }
 
@@ -50,10 +51,12 @@ public class Loader extends Positionable {
         loadedBox = direction.putUpBox(this, area);
         loadedBox.getPosition().setPositionable(null);
         loadedBox.setPosition(getPosition());
+        loadedBox.setLoaded(true);
     }
 
     public void putDownBox() {
         direction.step(1, loadedBox, area);
+        loadedBox.setLoaded(false);
         loadedBox = null;
     }
 
@@ -72,5 +75,4 @@ public class Loader extends Positionable {
     public void setDirection(DirectedState direction) {
         this.direction = direction;
     }
-
 }

@@ -1,17 +1,29 @@
 package com.mygaienko.rt_system.model;
 
+import com.mygaienko.rt_system.model.interfaces.LoaderImage;
 import com.mygaienko.rt_system.model.interfaces.Positionable;
-import com.mygaienko.rt_system.model.interfaces.Stepable;
+import com.mygaienko.rt_system.model.interfaces.State;
 
 /**
  * Created by dmygaenko on 20/05/2016.
  */
-public enum DirectedState implements Stepable {
+public enum DirectedState implements State, LoaderImage {
 
     UP {
         @Override
+        public String getImageUrl() {
+            return "/image/loader-up.jpg";
+        }
+
+        @Override
+        public String getLoadedImageUrl() {
+            return "/image/loader-loaded-up.jpg";
+        }
+
+        @Override
         public void step(int steps, Positionable positionable, WorkingArea area) {
             if (reachHorizontalBound(-steps, positionable, area)) {
+                return;
             }
 
             for (int i = 0; i < steps; i++) {
@@ -26,8 +38,19 @@ public enum DirectedState implements Stepable {
     },
     RIGHT {
         @Override
+        public String getImageUrl() {
+            return "/image/loader-right.jpg";
+        }
+
+        @Override
+        public String getLoadedImageUrl() {
+            return "/image/loader-loaded-right.jpg";
+        }
+
+        @Override
         public void step(int steps, Positionable positionable, WorkingArea area) {
-            if (reachVerticalBound(-steps, positionable, area)) {
+            if (reachVerticalBound(steps, positionable, area)) {
+                return;
             }
 
             for (int i = 0; i < steps; i++) {
@@ -42,8 +65,19 @@ public enum DirectedState implements Stepable {
     },
     DOWN {
         @Override
+        public String getImageUrl() {
+            return "/image/loader-down.jpg";
+        }
+
+        @Override
+        public String getLoadedImageUrl() {
+            return "/image/loader-loaded-down.jpg";
+        }
+
+        @Override
         public void step(int steps, Positionable positionable, WorkingArea area) {
             if (reachHorizontalBound(steps, positionable, area)) {
+                return;
             }
 
             for (int i = 0; i < steps; i++) {
@@ -58,8 +92,19 @@ public enum DirectedState implements Stepable {
     },
     LEFT {
         @Override
+        public String getImageUrl() {
+            return "/image/loader-left.jpg";
+        }
+
+        @Override
+        public String getLoadedImageUrl() {
+            return "/image/loader-loaded-left.jpg";
+        }
+
+        @Override
         public void step(int steps, Positionable positionable, WorkingArea area) {
-            if (reachVerticalBound(steps, positionable, area)) {
+            if (reachVerticalBound(-steps, positionable, area)) {
+                return;
             }
 
             for (int i = 0; i < steps; i++) {

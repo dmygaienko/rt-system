@@ -24,7 +24,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setTitle("A simple FXML Example");
+        stage.setTitle("Real Time System");
         stage.show();
     }
 

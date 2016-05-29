@@ -20,40 +20,35 @@ public class LoaderTest {
 
     @Test
     public void testTurnOn90() throws Exception {
-        Loader loader = new Loader(null);
-        loader.setDirection(DirectedState.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         loader.turnAround(90);
         assertEquals(DirectedState.LEFT, loader.getDirection());
     }
 
     @Test
     public void testTurnOn180() throws Exception {
-        Loader loader = new Loader(null);
-        loader.setDirection(DirectedState.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         loader.turnAround(180);
         assertEquals(DirectedState.UP, loader.getDirection());
     }
 
     @Test
     public void testTurnOn270() throws Exception {
-        Loader loader = new Loader(null);
-        loader.setDirection(DirectedState.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         loader.turnAround(270);
         assertEquals(DirectedState.RIGHT, loader.getDirection());
     }
 
     @Test
     public void testTurnOn360() throws Exception {
-        Loader loader = new Loader(null);
-        loader.setDirection(DirectedState.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         loader.turnAround(360);
         assertEquals(DirectedState.DOWN, loader.getDirection());
     }
 
     @Test
     public void testTurnOn450() throws Exception {
-        Loader loader = new Loader(null);
-        loader.setDirection(DirectedState.DOWN);
+        Loader loader = new Loader(area, DirectedState.DOWN);
         loader.turnAround(450);
         assertEquals(DirectedState.LEFT, loader.getDirection());
     }

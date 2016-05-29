@@ -33,7 +33,7 @@ public class TurnAroundRuleTest extends AbstractRuleTest {
     }
 
     @Test
-    public void testProcess() throws Exception {
-
+    public void testProcess90() throws Exception {
+        rule.process("turn around 90");
     }
 }

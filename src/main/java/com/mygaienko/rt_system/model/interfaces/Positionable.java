@@ -5,7 +5,7 @@ import com.mygaienko.rt_system.model.Position;
 /**
  * Created by dmygaenko on 20/05/2016.
  */
-public abstract class Positionable {
+public abstract class Positionable implements Image {
 
     private Position position;
 
