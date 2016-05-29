@@ -72,7 +72,4 @@ public class Loader extends Positionable {
         return direction;
     }
 
-    public void setDirection(DirectedState direction) {
-        this.direction = direction;
-    }
 }
