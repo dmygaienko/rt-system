@@ -16,11 +16,11 @@ public class WorkingArea {
     private final int length;
     private final int width;
 
-    private final List<Alarm> alarms = new ArrayList<>();
+    private volatile List<Alarm> alarms = new ArrayList<>();
 
-    private Position[][] positions;
+    private volatile Position[][] positions;
 
-    private List<Positionable> positionables = new ArrayList<>();
+    private volatile List<Positionable> positionables = new ArrayList<>();
 
     public WorkingArea(int length, int width) {
         this.length = length;
