@@ -3,6 +3,8 @@ package com.mygaienko.rt_system.model;
 import com.mygaienko.rt_system.model.interfaces.LoaderImage;
 import com.mygaienko.rt_system.model.interfaces.Positionable;
 import com.mygaienko.rt_system.model.interfaces.State;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by dmygaenko on 20/05/2016.
@@ -32,7 +34,7 @@ public enum DirectedState implements State, LoaderImage {
         }
 
         @Override
-        public Box putUpBox(Positionable positionable, WorkingArea area) {
+        public Box getPutBox(Positionable positionable, WorkingArea area) {
             return (Box) area.getPositionable(positionable.getX(), positionable.getY() - 1);
         }
     },
@@ -59,7 +61,7 @@ public enum DirectedState implements State, LoaderImage {
         }
 
         @Override
-        public Box putUpBox(Positionable positionable, WorkingArea area) {
+        public Box getPutBox(Positionable positionable, WorkingArea area) {
             return (Box) area.getPositionable(positionable.getX() + 1, positionable.getY());
         }
     },
@@ -86,7 +88,7 @@ public enum DirectedState implements State, LoaderImage {
         }
 
         @Override
-        public Box putUpBox(Positionable positionable, WorkingArea area) {
+        public Box getPutBox(Positionable positionable, WorkingArea area) {
             return (Box) area.getPositionable(positionable.getX(), positionable.getY() + 1);
         }
     },
@@ -113,30 +115,70 @@ public enum DirectedState implements State, LoaderImage {
         }
 
         @Override
-        public Box putUpBox(Positionable positionable, WorkingArea area) {
+        public Box getPutBox(Positionable positionable, WorkingArea area) {
             return (Box) area.getPositionable(positionable.getX() - 1, positionable.getY());
         }
     };
 
+    private static final Logger logger = LoggerFactory.getLogger(Loader.class);
+
+    private static final String HORIZONTAL = "horizontal";
+    private static final String VERTICAL = "vertical";
+
     protected void doStep(Positionable positionable, int x, int y, WorkingArea area) {
         Lock.lock();
-        if (area.isAllowed(x, y)) {
-            Position position = area.getPosition(x, y);
-            position.setPositionable(positionable);
-            positionable.setPosition(position);
+        boolean allowed = area.isAllowed(x, y);
+        if (allowed) {
+            clearCurrentPosition(positionable);
+            logStep(positionable);
+            setNewPosition(positionable, x, y, area);
+        } else {
+            logNotAllowedResult(allowed);
         }
         Lock.releaseLock();
         sleep();
     }
 
+    private void logStep(Positionable positionable) {
+        if (positionable instanceof Loader) {
+            logger.info("moving {} on one step", this.name().toLowerCase());
+        }
+    }
+
+    private void setNewPosition(Positionable positionable, int x, int y, WorkingArea area) {
+        Position position = area.getPosition(x, y);
+        position.setPositionable(positionable);
+        positionable.setPosition(position);
+    }
+
+    private void clearCurrentPosition(Positionable positionable) {
+        positionable.getPosition().setPositionable(null);
+    }
+
     protected boolean reachVerticalBound(int steps, Positionable positionable, WorkingArea area) {
         long target = positionable.getX() + steps;
-        return target < 0 || target >= area.getLength();
+        boolean reached = target < 0 || target >= area.getLength();
+        logReachBoundsResult(reached, VERTICAL);
+        return reached;
     }
 
     protected boolean reachHorizontalBound(int steps, Positionable positionable, WorkingArea area) {
         long target = positionable.getY() + steps;
-        return target < 0 || target >= area.getWidth();
+        boolean reached = target < 0 || target >= area.getWidth();
+        logReachBoundsResult(reached, HORIZONTAL);
+        return reached;
+    }
+
+    private void logReachBoundsResult(boolean reached, String type) {
+        if (reached) {
+            logger.info("not allowed to move {}. reached {} bounds", this.name().toLowerCase(), type);
+        }
+    }
+
+    private void logNotAllowedResult(boolean allowed) {
+        if (!allowed) {
+            logger.info("not allowed to move {}.", this.name().toLowerCase());
+        }
     }
 
     private void sleep() {

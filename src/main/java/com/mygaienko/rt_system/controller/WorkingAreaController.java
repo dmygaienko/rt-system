@@ -14,6 +14,8 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -25,6 +27,8 @@ import java.util.concurrent.TimeUnit;
  * Created by enda1n on 23.05.2016.
  */
 public class WorkingAreaController implements Initializable {
+
+    private static final Logger logger = LoggerFactory.getLogger(WorkingAreaController.class);
 
     private ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
 
@@ -53,10 +57,12 @@ public class WorkingAreaController implements Initializable {
     @FXML
     private void setAlarm(ActionEvent event) {
         area.setAlarm(Alarm.FIRE);
+        logger.info("alarm. process is stopped");
     }
 
     @FXML
     private void start(ActionEvent event) {
+        logger.info("process is started");
         area.startProcess();
     }
 

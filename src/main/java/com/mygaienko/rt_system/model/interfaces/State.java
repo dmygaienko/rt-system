@@ -10,6 +10,6 @@ public interface State {
 
     void step(int steps, Positionable position, WorkingArea area);
 
-    Box putUpBox(Positionable positionable, WorkingArea area);
+    Box getPutBox(Positionable positionable, WorkingArea area);
 
 }

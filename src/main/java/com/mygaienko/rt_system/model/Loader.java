@@ -54,16 +54,20 @@ public class Loader extends Positionable {
     }
 
     public void putUpBox() {
-        loadedBox = direction.putUpBox(this, area);
+        loadedBox = direction.getPutBox(this, area);
         loadedBox.getPosition().setPositionable(null);
         loadedBox.setPosition(getPosition());
         loadedBox.setLoaded(true);
+
+        logger.info("put up box from {}", direction.name().toLowerCase());
     }
 
     public void putDownBox() {
         direction.step(1, loadedBox, area);
         loadedBox.setLoaded(false);
         loadedBox = null;
+
+        logger.info("put down box to the {}", direction.name().toLowerCase());
     }
 
     @Override
