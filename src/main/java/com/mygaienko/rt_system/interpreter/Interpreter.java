@@ -5,6 +5,8 @@ import com.mygaienko.rt_system.model.Box;
 import com.mygaienko.rt_system.model.DirectedState;
 import com.mygaienko.rt_system.model.Loader;
 import com.mygaienko.rt_system.model.WorkingArea;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
  * Created by dmygaenko on 20/05/2016.
  */
 public class Interpreter {
+    private static final Logger logger = LoggerFactory.getLogger(Interpreter.class);
 
     private static final String COMMA = "\\.";
 
@@ -56,5 +59,6 @@ public class Interpreter {
                 }
             }
         }
+       logger.info("commands are completed");
     }
 }

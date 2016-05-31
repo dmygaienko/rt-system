@@ -23,6 +23,12 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/*
+turn around 90.
+move 5.
+turn around 270.
+move 7.
+*/
 /**
  * Created by enda1n on 23.05.2016.
  */
@@ -47,9 +53,12 @@ public class WorkingAreaController implements Initializable {
         executor.scheduleWithFixedDelay(
                 (Runnable) () ->
                         Platform.runLater(() -> {
-                            Lock.lock();
-                            redrawArea();
-                            Lock.releaseLock();
+                            if (!area.isAlarm()) {
+                                Lock.lock();
+                                redrawArea();
+                                Lock.releaseLock();
+                            }
+
                         }),
                 1, 1, TimeUnit.SECONDS);
     }

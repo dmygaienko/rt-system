@@ -128,13 +128,18 @@ public enum DirectedState implements State, LoaderImage {
     protected void doStep(Positionable positionable, int x, int y, WorkingArea area) {
         Lock.lock();
         boolean allowed = area.isAllowed(x, y);
-        if (allowed) {
-            clearCurrentPosition(positionable);
-            logStep(positionable);
-            setNewPosition(positionable, x, y, area);
-        } else {
+        while (!allowed) {
+            Lock.lock();
             logNotAllowedResult(allowed);
+            sleep();
+            allowed = area.isAllowed(x, y);
+            Lock.releaseLock();
         }
+
+        clearCurrentPosition(positionable);
+        logStep(positionable);
+        setNewPosition(positionable, x, y, area);
+
         Lock.releaseLock();
         sleep();
     }
@@ -183,7 +188,7 @@ public enum DirectedState implements State, LoaderImage {
 
     private void sleep() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
