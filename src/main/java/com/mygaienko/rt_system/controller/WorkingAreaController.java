@@ -24,9 +24,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /*
-turn around 90.
+turn down.
 move 5.
-turn around 270.
+turn right.
 move 7.
 */
 /**

@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class TurnAroundRule implements Rule {
 
     private static final Logger logger = LoggerFactory.getLogger(TurnAroundRule.class);
-    private static final String TURN_AROUND_PATTERN = "(^turn around\\s)(\\d+)";
+    private static final String TURN_AROUND_PATTERN = "(^TURN\\s)(UP|DOWN|LEFT|RIGHT)";
     private static final Pattern PATTERN = Pattern.compile(TURN_AROUND_PATTERN);
 
     private final Loader loader;
@@ -24,17 +24,17 @@ public class TurnAroundRule implements Rule {
 
     @Override
     public boolean isApplied(String msg) {
-        return PATTERN.matcher(msg).matches();
+        return PATTERN.matcher(msg.toUpperCase()).matches();
     }
 
     @Override
     public void process(String msg) {
-        Matcher matcher = PATTERN.matcher(msg);
+        Matcher matcher = PATTERN.matcher(msg.toUpperCase());
         if (matcher.matches())
-            logger.info("turn around command is applied");{
-            String arg = matcher.toMatchResult().group(2);
+            logger.info("turn command is applied");{
+            String side = matcher.toMatchResult().group(2);
 
-            loader.turnAround(Integer.valueOf(arg));
+            loader.turnOn(side);
         }
     }
 }

@@ -18,22 +18,29 @@ public class TurnAroundRuleTest extends AbstractRuleTest {
     }
 
     @Test
-    public void testIsApplied90() throws Exception {
-        assertTrue(rule.isApplied("turn around 90"));
+    public void testIsAppliedUp() throws Exception {
+        assertTrue(rule.isApplied("turn up"));
+        assertTrue(rule.isApplied("TURN UP"));
     }
 
     @Test
-    public void testIsApplied180() throws Exception {
-        assertTrue(rule.isApplied("turn around 180"));
+    public void testIsAppliedDown() throws Exception {
+        assertTrue(rule.isApplied("turn down"));
     }
 
     @Test
-    public void testIsAppliedWrong() throws Exception {
-        assertFalse(rule.isApplied("turn around"));
+    public void testIsAppliedLeft() throws Exception {
+        assertTrue(rule.isApplied("turn left"));
     }
 
     @Test
-    public void testProcess90() throws Exception {
-        rule.process("turn around 90");
+    public void testIsAppliedRight() throws Exception {
+        assertTrue(rule.isApplied("turn right"));
+    }
+
+
+    @Test
+    public void testProcessRight() throws Exception {
+        rule.process("turn right");
     }
 }

@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Commands:
- *      move forward on * steps
- *      turn on
+ *      move 2
+ *      turn left|right
  *      put up box
  *      put down box
  *
@@ -40,17 +40,10 @@ public class Loader extends Positionable {
         }
     }
 
-    public void turnAround(int degrees) {
-        DirectedState[] directions = DirectedState.values();
+    public void turnOn(String side) {
+        direction = DirectedState.valueOf(side.toUpperCase());
 
-        int sides = degrees / SIDE_DEGREES;
-        int i;
-        if (sides > 0) {
-            i = (direction.ordinal() + sides) % directions.length;
-            direction = directions[i];
-        }
-
-        logger.info("turned around on {} degrees", degrees);
+        logger.info("turned {} ", side);
     }
 
     public void putUpBox() {
