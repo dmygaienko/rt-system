@@ -25,7 +25,7 @@ public abstract class AbstractRule implements Rule {
         logger.info("{} command should be like '{}'. the difference started from {} is: '{}'",
                 getName(),
                 getExample(),
-                StringUtils.indexOf(getExample(), msg),
+                StringUtils.indexOfDifference(getExample(), msg),
                 StringUtils.difference(getExample(), msg));
     }
 }

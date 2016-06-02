@@ -23,6 +23,17 @@ public class MoveRuleTest extends AbstractRuleTest {
     }
 
     @Test
+    public void testIsApplied1d() throws Exception {
+        assertFalse(rule.isApplied("move 1d"));
+    }
+
+    @Test
+    public void testIsApplied2d() throws Exception {
+        assertFalse(rule.isApplied("mve 1d"));
+    }
+
+
+    @Test
     public void testIsAppliedWithoutDigit() throws Exception {
         assertFalse(rule.isApplied("move"));
     }

@@ -36,12 +36,12 @@ public class PutDownBoxRule extends AbstractRule {
 
     @Override
     public String getName() {
-        return EXAMPLE;
+        return NAME;
     }
 
     @Override
     public String getExample() {
-        return NAME;
+        return EXAMPLE;
     }
 
     @Override

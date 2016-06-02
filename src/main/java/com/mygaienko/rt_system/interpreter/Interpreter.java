@@ -59,6 +59,7 @@ public class Interpreter {
         if (!found) {
             logger.info("commands have errors");
         }
+
         return found;
     }
 
