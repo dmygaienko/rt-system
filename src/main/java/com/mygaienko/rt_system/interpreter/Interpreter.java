@@ -41,6 +41,27 @@ public class Interpreter {
         return loader;
     }
 
+    public boolean analyze(String text) {
+        boolean found = false;
+
+        String[] commands = text.split(COMMA);
+        for (String command : commands) {
+            String trimmed = command.trim();
+
+            for (Rule rule : rules) {
+                if (rule.isApplied(trimmed)) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        logger.info("commands are analyzed");
+        if (!found) {
+            logger.info("commands have errors");
+        }
+        return found;
+    }
+
     /**
      * Commands:
      *      move forward on * steps
@@ -48,8 +69,8 @@ public class Interpreter {
      *      put up box
      *      put down box
      */
-    public void interpet(String msg) {
-        String[] commands = msg.split(COMMA);
+    public void interpet(String text) {
+        String[] commands = text.split(COMMA);
         for (String command : commands) {
             String trimmed = command.trim();
             for (Rule rule : rules) {
@@ -59,6 +80,12 @@ public class Interpreter {
                 }
             }
         }
-       logger.info("commands are completed");
+        logger.info("commands are completed");
+    }
+
+    public void handle(String text) {
+        if (analyze(text)) {
+            interpet(text);
+        }
     }
 }

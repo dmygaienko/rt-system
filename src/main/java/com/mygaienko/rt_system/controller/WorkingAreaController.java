@@ -84,8 +84,7 @@ public class WorkingAreaController implements Initializable {
     @FXML
     private void interpret(ActionEvent event) {
         executor.execute(() -> {
-            interpreter.interpet(commandArea.getText());
-
+            interpreter.handle(commandArea.getText());
             commandArea.clear();
         });
     }
