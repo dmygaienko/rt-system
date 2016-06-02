@@ -1,6 +1,7 @@
 package com.mygaienko.rt_system.model;
 
 import com.mygaienko.rt_system.model.alarm.Alarm;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -26,5 +27,10 @@ public class WorkingAreaTest {
 
         assertTrue(workingArea.isAlarm());
         assertFalse(workingArea.isAllowed(1, 1));
+    }
+
+    @Test
+    public void testString() throws Exception {
+        System.out.println(StringUtils.difference("mve 1", "move 1"));
     }
 }

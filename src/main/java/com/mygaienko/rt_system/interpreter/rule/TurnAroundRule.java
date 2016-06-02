@@ -10,21 +10,19 @@ import java.util.regex.Pattern;
 /**
  * Created by enda1n on 22.05.2016.
  */
-public class TurnAroundRule implements Rule {
+public class TurnAroundRule extends AbstractRule {
 
     private static final Logger logger = LoggerFactory.getLogger(TurnAroundRule.class);
     private static final String TURN_AROUND_PATTERN = "(^TURN\\s)(UP|DOWN|LEFT|RIGHT)";
     private static final Pattern PATTERN = Pattern.compile(TURN_AROUND_PATTERN);
 
+    private static final String EXAMPLE = "turn down";
+    private static final String NAME = "turn around";
+
     private final Loader loader;
 
     public TurnAroundRule(Loader loader) {
         this.loader = loader;
-    }
-
-    @Override
-    public boolean isApplied(String msg) {
-        return PATTERN.matcher(msg.toUpperCase()).matches();
     }
 
     @Override
@@ -36,5 +34,25 @@ public class TurnAroundRule implements Rule {
 
             loader.turnOn(side);
         }
+    }
+
+    @Override
+    public String getName() {
+        return EXAMPLE;
+    }
+
+    @Override
+    public String getExample() {
+        return NAME;
+    }
+
+    @Override
+    public boolean isSimilar(String msg) {
+        return msg.trim().startsWith("t");
+    }
+
+    @Override
+    public Pattern getPattern() {
+        return PATTERN;
     }
 }

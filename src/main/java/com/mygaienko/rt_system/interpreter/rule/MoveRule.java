@@ -10,21 +10,19 @@ import java.util.regex.Pattern;
 /**
  * Created by enda1n on 22.05.2016.
  */
-public class MoveRule implements Rule{
+public class MoveRule extends AbstractRule {
 
     private static final Logger logger = LoggerFactory.getLogger(MoveRule.class);
-    private static final String MOVE_REGEX = "(^move\\s)(\\d+)";
-    private static final Pattern PATTERN = Pattern.compile(MOVE_REGEX);
+    private static final String REGEX = "(^move\\s)(\\d+)";
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
+
+    private static final String EXAMPLE = "move 1";
+    private static final String NAME = "move";
 
     private final Loader loader;
 
     public MoveRule(Loader loader) {
         this.loader = loader;
-    }
-
-    @Override
-    public boolean isApplied(String msg) {
-        return PATTERN.matcher(msg).matches();
     }
 
     @Override
@@ -36,5 +34,25 @@ public class MoveRule implements Rule{
 
             loader.moveForward(Integer.valueOf(arg));
         }
+    }
+
+    @Override
+    public boolean isSimilar(String msg) {
+        return msg.trim().startsWith("m");
+    }
+
+    @Override
+    public String getName() {
+        return EXAMPLE;
+    }
+
+    @Override
+    public String getExample() {
+        return NAME;
+    }
+
+    @Override
+    public Pattern getPattern() {
+        return PATTERN;
     }
 }

@@ -10,21 +10,19 @@ import java.util.regex.Pattern;
 /**
  * Created by enda1n on 22.05.2016.
  */
-public class PutDownBoxRule implements Rule{
+public class PutDownBoxRule extends AbstractRule {
 
     private static final Logger logger = LoggerFactory.getLogger(PutDownBoxRule.class);
-    private static final String PUT_DOWN_REGEX = "^put down";
-    private static final Pattern PATTERN = Pattern.compile(PUT_DOWN_REGEX);
+    private static final String REGEX = "^put down";
+    private static final Pattern PATTERN = Pattern.compile(REGEX);
+
+    private static final String EXAMPLE = "put down";
+    private static final String NAME = "put down";
 
     private final Loader loader;
 
     public PutDownBoxRule(Loader loader) {
         this.loader = loader;
-    }
-
-    @Override
-    public boolean isApplied(String msg) {
-        return PATTERN.matcher(msg).matches();
     }
 
     @Override
@@ -34,5 +32,25 @@ public class PutDownBoxRule implements Rule{
             logger.info("put down command is applied");
             loader.putDownBox();
         }
+    }
+
+    @Override
+    public String getName() {
+        return EXAMPLE;
+    }
+
+    @Override
+    public String getExample() {
+        return NAME;
+    }
+
+    @Override
+    public boolean isSimilar(String msg) {
+        return msg.trim().startsWith("p") && msg.contains("d");
+    }
+
+    @Override
+    public Pattern getPattern() {
+        return PATTERN;
     }
 }
